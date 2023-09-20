@@ -10,6 +10,6 @@ void prompt(void)
 {
 	if (isatty(STDIN_FILENO) == 1)
 	{
-		printf("$ ");
+		write(STDOUT_FILENO, "$ ", 2);
 	}
 }

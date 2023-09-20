@@ -29,4 +29,9 @@ void execute_command(char *command);
 void interactive(void);
 void non_interactive(void);
 
+/* HELPER FUNCTIONS */
+char *_strcpy(char *dest, char *src);
+int _strlen(char *str);
+void _printf(char *str, int stream);
+
 #endif /*SHELL_H*/

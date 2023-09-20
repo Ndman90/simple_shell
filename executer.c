@@ -34,12 +34,10 @@ void executer(char **argv) {
                 perror("Error: Execution failed");
                 exit(EXIT_FAILURE);
             }
-        } else {
-            // Parent process
-            waitpid(child_ID, &status, 0); // Wait for the child to finish
-        }
+        } else
+            waitpid(child_ID, &status, 0);
         
-        free(actual_command); // Free memory allocated for actual_command
+        free(actual_command);
     }
 }
 
