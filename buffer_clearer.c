@@ -8,12 +8,12 @@
 
 void buffer_clearer(void)
 {
-  /* Clear the input buffer */
-  int c;
-  while ((c = getchar()) != '\n' && c != EOF)
-  {
-    fflush(stdin);
-  }
+	int c;
+
+	while ((c = getchar()) != '\n' && c != EOF)
+	{
+		fflush(stdin);
+	}
 }
 
 
