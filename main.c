@@ -1,22 +1,32 @@
 #include "shell.h"
 
 /**
- * main - Entry point to shell program
- * @argc: Number of arguments passed into the shell executable.
- * @argv: Vector containing arguments passed.
+ * main - Shell main function
+ * @ac: Argument count
+ * @argv: Arguments
  *
- * Return: 0 on success or 1 on failure.
+ * Return: 0 Always (Success).
  */
-int main(__attribute__((unused)) int argc,
-		__attribute__((unused)) char **argv)
+int main(int ac, char **argv)
 {
-	if (isatty(STDIN_FILENO) == 1)
-	{
-		interactive();
-	} else
-	{
-		non_interactive();
-	}
+	char *line = NULL, **cmd = NULL;
+	int stat = 0;
+	(void) ac;
 
-	return (0);
+	while (1)
+	{
+		line = readLine();
+		if (!line) /* Reach EOF Ctrl + D */
+		{
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
+			return (stat);
+		}
+
+		cmd = tknizer(line);
+		if (!cmd)
+			continue;
+
+		stat = _exec(cmd, argv);
+	}
 }
