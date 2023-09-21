@@ -1,11 +1,8 @@
 #include "shell.h"
 
 /**
- * executer - function that excute commands
- * that's not part of builtins
- *
+ * executer - function that execute commands
  * @argv: command to be executed
- * Return: Nothing(void)
  */
 
 void executer(char **argv)
@@ -17,7 +14,6 @@ void executer(char **argv)
 	if (argv)
 	{
 		command = argv[0];
-
 		actual_command = get_location(command);
 
 		if (actual_command == NULL)
