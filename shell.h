@@ -37,5 +37,7 @@ char *_strchar(char *str, char ch);
 int _strcmp(char str[], const char *delim);
 char *_strtok(char *str, char *delim);
 void _printf(char *str, int stream);
+void _setenv(char *name, char *value);
+void _printenv()
 
 #endif /*SHELL_H*/
