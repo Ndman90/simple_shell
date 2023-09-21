@@ -16,6 +16,9 @@ extern char **environ;
 
 char *readLine(void);
 char **tknizer(char *line);
+int _exec(char **cmd, char **argv);
+char *_getpath(char *cmd);
+char *_getenv(char *env_var);
 
 char *_strcpy(char *dest, char *src);
 char *_strdup(const char *str);
@@ -24,6 +27,5 @@ int _strlen(char *str);
 int _strcmp(char *str1, char *str2);
 
 void arrClean(char **arr);
-int _exec(char **cmd, char **argv);
 
 #endif
