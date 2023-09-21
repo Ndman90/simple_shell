@@ -19,7 +19,7 @@ int _exec(char **cmd, char **argv)
 		{
 			perror(argv[0]);
 			arrClean(cmd);
-			exit(0);
+			exit(127);
 		}
 	} else
 	{
