@@ -10,9 +10,9 @@
 
 void builtin_cmd(char *command)
 {
-	if (strcmp(command, "exit") == 0)
+	if (_strcmp(command, "exit") == 0)
 	{
-		printf("exit\n");
+		_printf("exit\n");
 		exit(0);
 	}
 	else
