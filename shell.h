@@ -24,9 +24,9 @@ char *get_location(char *command);
 char *trim_whitespace(const char *line);
 void buffer_clearer(void);
 void prompt(void);
-int execute_with_pipe(char **command, int prev_pipe_fd[2]);
 void execute_command(char *command);
 void interactive(void);
 void non_interactive(void);
+void builtin_cmd(char *command);
 
 #endif /*SHELL_H*/
