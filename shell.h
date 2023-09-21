@@ -18,7 +18,6 @@
 #include <stdarg.h>
 #include <errno.h>
 
-
 void executer(char **argv);
 char *get_location(char *command);
 char *trim_whitespace(const char *line);
