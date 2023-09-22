@@ -10,7 +10,7 @@
 int main(int ac, char **argv)
 {
 	char *line = NULL, **cmd = NULL;
-	int stat = 0;
+	int status = 0, index = 0;
 	(void) ac;
 
 	while (1)
@@ -20,13 +20,17 @@ int main(int ac, char **argv)
 		{
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
-			return (stat);
+			return (status);
 		}
+		index++;
 
 		cmd = tknizer(line);
 		if (!cmd)
 			continue;
 
-		stat = _exec(cmd, argv);
+		if (is_cmd_builtin(cmd[0]))
+			_handle_builtins(cmd, argv, &status, index);
+		else
+			 status = _exec(cmd, argv, index);
 	}
 }

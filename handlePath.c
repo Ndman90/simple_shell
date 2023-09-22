@@ -9,9 +9,22 @@
 char *_getpath(char *cmd)
 {
 	char *env_path, *f_cmd, *dir;
+	int i;
 	struct stat st;
 
+	for (i = 0; cmd[i]; i++)
+	{
+		if (cmd[i] == '/')
+		{
+			if (stat(cmd, &st) == 0)
+				return (_strdup(cmd));
+			return (NULL);
+		}
+	}
+
 	env_path = _getenv("PATH");
+	if (!env_path)
+		return (NULL);
 
 	dir = strtok(env_path, ":");
 	while (dir)
@@ -27,29 +40,11 @@ char *_getpath(char *cmd)
 				free(env_path);
 				return (f_cmd);
 			}
-			free(f_cmd), cmd = NULL;
+			free(f_cmd), f_cmd = NULL;
 
 			dir = strtok(NULL, ":");
 		}
 	}
 	free(env_path);
 	return (NULL);
-}
-
-/**
- * main - Entry point
- * @ac: argument
- * @av: argument
- *
- * Return: 0
- */
-int main(int ac, char **av)
-{
-	char *f_cmd;
-
-	f_cmd = _getpath(av[1]);
-	if (f_cmd)
-		printf("%s\n", f_cmd);
-	else
-		printf("Does not exist");
 }

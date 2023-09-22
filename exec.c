@@ -7,24 +7,33 @@
  *
  * Return: 0
  */
-int _exec(char **cmd, char **argv)
+int _exec(char **cmd, char **argv, int index)
 {
+	char *f_cmd;
 	pid_t child;
-	int stat;
+	int status;
+
+	f_cmd = _getpath(cmd[0]);
+	if (!f_cmd)
+	{
+		_printerr(argv[0], cmd[0], index);
+		arrClean(cmd);
+		return (127);
+	}
 
 	child = fork();
 	if (child == 0)
 	{
-		if (execve(cmd[0], cmd, environ) == -1)
+		if (execve(f_cmd, cmd, environ) == -1)
 		{
-			perror(argv[0]);
+			free(f_cmd), f_cmd = NULL;
 			arrClean(cmd);
-			exit(127);
 		}
 	} else
 	{
-		waitpid(child, &stat, 0);
+		waitpid(child, &status, 0);
 		arrClean(cmd);
+		free(f_cmd), f_cmd = NULL;
 	}
-	return (WEXITSTATUS(stat));
+	return (WEXITSTATUS(status));
 }
