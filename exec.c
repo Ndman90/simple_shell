@@ -3,10 +3,11 @@
 /**
  * _exec - Executes command
  * @cmd: command passed
- * @index: index location of argument
+ * @index: index of command
  * @argv: arguments
  *
- * Return: 0
+ * Return: the exit status of child process
+ * or 127 if the command does not exist
  */
 int _exec(char **cmd, char **argv, int index)
 {
@@ -27,8 +28,8 @@ int _exec(char **cmd, char **argv, int index)
 	{
 		if (execve(f_cmd, cmd, environ) == -1)
 		{
-			free(f_cmd), f_cmd = NULL;
 			arrClean(cmd);
+			free(f_cmd), f_cmd = NULL;
 		}
 	} else
 	{

@@ -90,3 +90,23 @@ void rev_str(char *str, int len)
 	}
 }
 
+/**
+ * _printcderr - Prints error message on change directory fail
+ * @name: shell name
+ * @index: command index
+ * @path: non-existent path
+ */
+void _printcderr(char *name, int index, char *path)
+{
+	char *idx, msg[] = ": cd: can't cd to ";
+
+	idx = _atoi(index);
+	write(STDERR_FILENO, name, _strlen(name));
+	write(STDERR_FILENO, ": cd: ", 2);
+	write(STDERR_FILENO, idx, _strlen(idx));
+	write(STDERR_FILENO, msg, _strlen(msg));
+	write(STDERR_FILENO, path, _strlen(path));
+	write(STDERR_FILENO, "\n", 1);
+
+	free(idx);
+}
