@@ -3,6 +3,7 @@
 /**
  * _exec - Executes command
  * @cmd: command passed
+ * @index: index location of argument
  * @argv: arguments
  *
  * Return: 0

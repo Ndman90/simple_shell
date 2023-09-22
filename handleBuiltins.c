@@ -24,13 +24,13 @@ int is_cmd_builtin(char *cmd)
 
 /**
  * _handle_builtins - Builtin handler
- * @cmd: Argument
+ * @cmd: First argument
+ * @argv: Second argument
+ * @status: Third argument
+ * @index: Fourth argument
  */
 void _handle_builtins(char **cmd, char **argv, int *status, int index)
 {
-	/*(void) argv;
-	(void) index;*/
-
 	if (_strcmp(cmd[0], "exit") == 0)
 		_exit_shell(cmd, argv, status, index);
 	else if (_strcmp(cmd[0], "env") == 0)
@@ -38,15 +38,17 @@ void _handle_builtins(char **cmd, char **argv, int *status, int index)
 }
 
 /**
- * _exit - Exit shell terminal
- * @cmd: Argument
- * @status: Argument
+ * _exit_shell - Exit shell terminal
+ * @cmd: First argument
+ * @argv: Second argument
+ * @status: Third argument
+ * @index: Fourth argument
  */
 void _exit_shell(char **cmd, char **argv, int *status, int index)
 {
 	int value = (*status);
 	char *idx, err_msg[] = ": exit: Illegal number: ";
-	
+
 	if (cmd[1])
 	{
 		if (is_positive(cmd[1]))
@@ -56,7 +58,7 @@ void _exit_shell(char **cmd, char **argv, int *status, int index)
 		{
 			idx = _atoi(index);
 
-		        write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": ", 2);
 			write(STDERR_FILENO, idx, _strlen(idx));
 			write(STDERR_FILENO, err_msg, _strlen(err_msg));
